@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh "docker build --pull -t ${IMAGE}:${TAG} ."
                 sh "docker stop nodejs"
-                sh "docker run -it -d  ${IMAGE}:${TAG} --name nodejs "
+                sh "docker run -it -d -p 8081:8081  ${IMAGE}:${TAG} --name nodejs "
                 sh "docker ps"
             }
         }
