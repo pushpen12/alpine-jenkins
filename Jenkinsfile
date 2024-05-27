@@ -8,6 +8,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh "docker build --pull -t ${IMAGE}:${TAG} ."
+                sh "docker run -it -d  ${IMAGE}:${TAG}"
+                sh "docker ps"
             }
         }
         stage('Push to dockerhub') {
