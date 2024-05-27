@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE='FROM node:14'
+        IMAGE='node:14'
         TAG='latest'
     }
     stages {
