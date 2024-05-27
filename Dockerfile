@@ -1,4 +1,4 @@
-FROM node10
+FROM node10:latest
 
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
