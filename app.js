@@ -1,16 +1,26 @@
-// Import the http module
-const http = require('http');
+const express = require('express');
+const app = express();
+const router = express.Router();
 
-// Create a server object
-const server = http.createServer((req, res) => {
-  // Write a response header
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  // Write a response body
-  res.end('Hello from Docker!\n');
+const path = __dirname + '/views/';
+const port = 8080;
+
+router.use(function (req,res,next) {
+  console.log('/' + req.method);
+  next();
 });
 
-// Listen on port 3000
-server.listen(3000, () => {
-  // Log a message when the server starts
-  console.log('Server running at http://localhost:3000/');
+router.get('/',function(req,res){
+  res.sendFile(path + 'index.html');
 });
+
+router.get('/sharks',function(req,res){
+  res.sendFile(path + 'sharks.html');
+});
+
+app.use(express.static(path));
+app.use('/', router);
+
+app.listen(port, function () {
+  console.log('Example app listening on port 8080!')
+})

@@ -1,14 +1,17 @@
-# Use an existing image as a base
-FROM node:14
+FROM node:10-alpine
 
-# Set the working directory
-WORKDIR /usr/src/app
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
-# Copy the app.js file
-COPY app.js .
+WORKDIR /home/node/app
 
-# Expose the port that the app listens on
-EXPOSE 3000
+COPY package*.json ./
 
-# Define the command to run the app
-CMD ["node", "app.js"]
+USER node
+
+RUN npm install
+
+COPY --chown=node:node . .
+
+EXPOSE 8080
+
+CMD [ "node", "app.js" ]
