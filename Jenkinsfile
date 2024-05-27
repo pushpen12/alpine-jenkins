@@ -5,9 +5,12 @@ pipeline {
         TAG='latest'
     }
     stages {
-        stage('Checkout' {
-           steps{ checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pushpen12/alpine-jenkins.git']])
-                }}
+        stage('Checkout') {
+           steps{ 
+             
+             sh "checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pushpen12/alpine-jenkins.git']])"
+                }
+        }
         stage('Build') {
             steps {
                 sh "docker build --pull -t ${IMAGE}:${TAG} ."
