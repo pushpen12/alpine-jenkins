@@ -7,8 +7,8 @@ pipeline {
     stages {
         stage('Checkout') {
            steps{ 
-             
-             sh "checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pushpen12/alpine-jenkins.git']])"
+             checkout scmGit(branches: [[name: '*/master']], extensions: [], 
+                             userRemoteConfigs: [[url: 'https://github.com/pushpen12/alpine-jenkins.git']])
                 }
         }
         stage('Build') {
