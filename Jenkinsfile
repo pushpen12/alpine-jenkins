@@ -1,10 +1,13 @@
 pipeline {
     agent any
     environment {
-        IMAGE='liatrio/jenkins-alpine'
+        IMAGE='FROM node:14'
         TAG='latest'
     }
     stages {
+        stage('Checkout' {
+           steps{ checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pushpen12/alpine-jenkins.git']])
+                }}
         stage('Build') {
             steps {
                 sh "docker build --pull -t ${IMAGE}:${TAG} ."
